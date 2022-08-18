@@ -6,42 +6,40 @@ const importObject = { wasi_snapshot_preview1: wasi.wasiImport };
 
 (async () => {
   const wasm = await WebAssembly.compile(
-    fs.readFileSync("./function/hello.wasm")
+    fs.readFileSync("./hello.wasm")
   );
   const instance = await WebAssembly.instantiate(wasm, importObject);
 
   wasi.start(instance);
 
+  // get the position (in memory) of the pointer
   const helloStringPosition = instance.exports.hello()
+  console.log("--------------------------------------")
+  console.log("1️⃣ position of the pointer", helloStringPosition)
+  console.log("--------------------------------------")
 
-  console.log("position of the pointer", helloStringPosition)
-
+  // read the allocated memory (the memory of the wasm module)
   const memory = instance.exports.memory
+  console.log("2️⃣ memory.buffer:", memory.buffer)
+  console.log("--------------------------------------")
 
-  //console.log("🤖 memory.buffer:", memory.buffer)
   /*
-    memory.buffer is an ArrayBuffer
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
-
-    It is an array of bytes, often referred to in other languages as a "byte array". You cannot directly manipulate the contents of an ArrayBuffer; instead, you create one of the typed array objects or a DataView object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
-
+    1- You cannot directly manipulate the contents of an ArrayBuffer
+    2- You need to create a new one (a typed array of object) to read the content
   */
-  //const completeBufferFromMemory = new Uint8Array(memory.buffer)
-
-  //console.log("extract --->", completeBufferFromMemory.slice(helloStringPosition, helloStringPosition+11))
-
-  //completeBufferFromMemory.slice(helloStringPosition, helloStringPosition+11).forEach(item => console.log(item,":",String.fromCharCode(item)))
-
-
   const extractedBuffer = new Uint8Array(memory.buffer, helloStringPosition, 11) // 11 == length of "hello world"
+  /*
+    3- But you need to know the length of the string
+  */
 
-  console.log(extractedBuffer)
+  console.log("3️⃣ Extracted buffer:", extractedBuffer)
 
+  console.log("--------------------------------------")
   extractedBuffer.forEach(item => console.log(item,":",String.fromCharCode(item)))
+  console.log("--------------------------------------")
 
   const str = new TextDecoder("utf8").decode(extractedBuffer)
-  console.log(`📝: ${str}`)
+  console.log(`📝 decoded string: ${str}`)
+  console.log("--------------------------------------")
 
 })();
-
-// $ node --experimental-wasi-unstable-preview1 index.js

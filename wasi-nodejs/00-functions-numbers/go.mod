@@ -1,3 +1,3 @@
 module wasi/tinygo/add
 
-go 1.18
+go 1.19
