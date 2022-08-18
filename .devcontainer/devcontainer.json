@@ -1,5 +1,5 @@
 {
-  "image": "k33g/free-wasm:0.0.0",
+  "image": "k33g/free-wasm:0.0.1",
   "forwardPorts": [8080,3000,5000],
   "postCreateCommand": "echo 'hello'",
   "customizations": {
