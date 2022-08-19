@@ -5,8 +5,6 @@ import (
   "fmt"
 )
 
-// Declare a main function, this is the entrypoint into our go module
-// That will be run.
 func main() { }
 
 //export hello
@@ -20,11 +18,12 @@ func hello() uint64 { // ptrAndSize
   ptr := uint32(unsafePtr)
   size := uint32(len(buf))
 
-  fmt.Println("ptr:", ptr)
-  fmt.Println("size", size)
+  fmt.Println("[tinygo]ptr:", ptr)
+  fmt.Println("[tinygo]size:", size)
+
   ret := (uint64(ptr) << uint64(32)) | uint64(size)
 
-  fmt.Println("ret:", ret)
+  fmt.Println("[tinygo]ret:", ret)
 
 	return ret
 }

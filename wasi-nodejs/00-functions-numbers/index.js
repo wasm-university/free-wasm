@@ -18,4 +18,3 @@ const importObject = { wasi_snapshot_preview1: wasi.wasiImport };
 
 })();
 
-// $ node --experimental-wasi-unstable-preview1 --no-warnings index.js

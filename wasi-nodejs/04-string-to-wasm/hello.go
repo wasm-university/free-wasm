@@ -8,47 +8,38 @@ import (
 
 func main() { }
 
+// Allocate the in-Wasm memory region and returns its pointer to host.
 
 //export alloc
 func alloc(size uint32) *byte {
-	// Allocate the in-Wasm memory region and returns its pointer to hosts.
-	// The region is supposed to store random strings generated in hosts,
-	// meaning that this is called "inside" of host_get_string.
 	buf := make([]byte, size)
-	return &buf[0]
+	return &buf[0] // return starting position
 }
 
 //export hello
-func hello(subject *uint32, length int) uint64 { // ptrAndSize
+func hello(subject *uint32, length int) uint64 {
 
-  // https://radu-matei.com/blog/practical-guide-to-wasm-memory/#exchanging-strings-between-modules-and-runtimes
-  // https://wasmedge.org/book/en/embed/go/memory.html#pass-strings-to-tinygo-functions
-
-  fmt.Println("🤖", length)
+  fmt.Println("[tinygo]length:", length)
 
   var subjectStr strings.Builder
   pointer := uintptr(unsafe.Pointer(subject))
+  // "parse" memory
   for i := 0; i < length; i++ {
     s := *(*int32)(unsafe.Pointer(pointer + uintptr(i)))
-    fmt.Println("🤖🤖", i, s)
+    fmt.Println("[tinygo]-->", i, string(byte(s)))
     subjectStr.WriteByte(byte(s))
   }
 
   output := subjectStr.String()
-
+  fmt.Println("[tinygo]string param:", output)
   message := "👋 hello " + output
 	buf := []byte(message)
 	bufPtr := &buf[0]
 	unsafePtr := uintptr(unsafe.Pointer(bufPtr))
-
   ptr := uint32(unsafePtr)
   size := uint32(len(buf))
 
-  fmt.Println("ptr:", ptr)
-  fmt.Println("size", size)
   ret := (uint64(ptr) << uint64(32)) | uint64(size)
-
-  fmt.Println("ret:", ret)
 
 	return ret
 }

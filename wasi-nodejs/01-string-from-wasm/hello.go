@@ -8,8 +8,8 @@ func hello() *byte {
 }
 
 /*
-- convert the string to an array of bytes
-- get the position of the first byte of the array
+- string => an array of bytes
+- get the pos of 1st byte of the array
 - return a pointer of the byte
 */
 

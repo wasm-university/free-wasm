@@ -16,7 +16,7 @@ const importObject = { wasi_snapshot_preview1: wasi.wasiImport };
   // get a kind of pair of value
   const helloPointerSize = instance.exports.hello(); // ptrSize
 
-  console.log(helloPointerSize, typeof helloPointerSize); // bigInt
+  console.log("[js]pair:",helloPointerSize, typeof helloPointerSize); // bigInt
 
   const memory = instance.exports.memory;
 
@@ -28,11 +28,15 @@ const importObject = { wasi_snapshot_preview1: wasi.wasiImport };
   const stringPtrPosition = Number(helloPointerSize >> BigInt(32));
   const stringSize = Number(helloPointerSize & MASK);
 
+  console.log("[js]pos:",stringPtrPosition)
+  console.log("[js]size:",stringSize)
+
+
   const extractedBuffer = completeBufferFromMemory.slice(stringPtrPosition, stringPtrPosition+stringSize)
 
+  console.log("[js]extractedBuffer:",extractedBuffer)
+
   const str = new TextDecoder("utf8").decode(extractedBuffer)
-  console.log(str)
+  console.log("[js]size:", str)
 
 })();
-
-// $ node --experimental-wasi-unstable-preview1 index.js
