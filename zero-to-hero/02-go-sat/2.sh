@@ -3,10 +3,12 @@
 ########################
 # include the magic
 ########################
-. ../demo-magic.sh
+. ../../demo-magic.sh
 
 # hide the evidence
 clear
 
 # Put your stuff here
-pei "grain compile divide.gr"
+pei "./demo ping/ping.wasm http://localhost:9090"
+
+

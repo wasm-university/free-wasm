@@ -3,7 +3,7 @@
 ########################
 # include the magic
 ########################
-. ../demo-magic.sh
+. ../../demo-magic.sh
 
 # hide the evidence
 clear
