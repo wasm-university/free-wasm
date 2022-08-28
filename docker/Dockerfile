@@ -10,7 +10,8 @@ RUN brew install httpie && \
     brew install bat && \
     brew install exa && \
     brew install hey && \
-    brew install redis
+    brew install redis && \
+    brew install pv
 
 # ------------------------------------
 # Install TinyGo
@@ -26,4 +27,30 @@ RUN rm tinygo_${TINYGO_VERSION}_amd64.deb
 RUN curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash -s -- -v 0.10.0 && \
     curl https://get.wasmer.io -sSfL | sh && \
     curl https://wasmtime.dev/install.sh -sSf | bash
+
+# ------------------------------------
+# Install Subo
+# ------------------------------------
+
+RUN brew tap suborbital/subo && \
+    brew install subo
+
+# ------------------------------------
+# Install Sat (Suborbital)
+# ------------------------------------
+RUN git clone --depth=1 https://github.com/suborbital/sat.git && \
+    cd sat && \
+    go build -o .bin/sat -tags netgo,wasmtime . && \
+    sudo cp .bin/sat /usr/local/bin/sat && \
+    cd .. && \
+    rm -rf sat
+
+# ------------------------------------
+# Install grain support
+# ------------------------------------
+ARG GRAIN_VERSION="0.5.3"
+
+RUN sudo curl -L --output /usr/local/bin/grain \
+https://github.com/grain-lang/grain/releases/download/grain-v${GRAIN_VERSION}/grain-linux-x64 \
+&& sudo chmod +x /usr/local/bin/grain
 

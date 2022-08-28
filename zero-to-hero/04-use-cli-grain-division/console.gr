@@ -1,0 +1,29 @@
+import File from "sys/file"
+import List from "list"
+
+let display = (text) => {
+  File.fdWrite(File.stdout, text)
+}
+
+export let input = (message) => {
+  display(message)
+  let mut ret = []
+  while (true) {
+    match (File.fdRead(File.stdin, 1)) {
+      Ok((s, _)) => {
+        if (s != "\n") {
+          ret = List.append(ret, [s])
+          void
+        } else {
+          break
+        }
+      },
+      Err(e) => print(e),
+    }
+  }
+  List.join("", ret)
+}
+
+//let inputLine = input("🤖 please type something > ")
+//print(inputLine)
+

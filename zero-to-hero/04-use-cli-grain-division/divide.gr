@@ -1,0 +1,44 @@
+import Result from "result"
+import Number from "number"
+import Float64 from "float64"
+
+import Console from "./console"
+
+let division = (x, y) => {
+  let a = Float64.fromNumber(x)
+  let b = Float64.fromNumber(y)
+  let r = Float64.toNumber(Float64.div(a,b))
+
+  match(r) {
+    r when Number.isInfinite(r) => Err("😡 Division by zero"),
+    _ => Ok(r)
+  }
+}
+
+let a = Console.input("🤖 please give me a value for A > ")
+let b = Console.input("🎃 please give me a value for B > ")
+
+let dividend = Number.parseInt(a, 10)
+let divisor = Number.parseInt(b, 10)
+
+match(dividend) {
+  Err(message) => print("😡 dividend: "++message),
+  Ok(dividend_value) => {
+    match(divisor) {
+      Err(message) => print("😡 divisor: "++message),
+      Ok(divisor_value) => {
+        //print(dividend)
+        //print(divisor)
+
+        match(division(dividend_value, divisor_value)) {
+          Err(message) => print(message),
+          Ok(value) => {
+            print("🎉 division result: ")
+            print(value)
+          }
+        }
+
+      }
+    }
+  }
+}
