@@ -32,11 +32,10 @@
 				.then(resultObject => {
 					console.log("👋 main.wasm is loaded")
 					console.log("📝 Import Object", go.importObject)
-					console.log("📦 Result Object", resultObject)
-
 					// execute `main` of the Go module and load the Hello function
 					go.run(resultObject.instance)
 					// instance object contains all the Exported WebAssembly functions
+          console.log("📦 Instance Object", resultObject.instance)
 
           // Call the Go function
           let jsonData = Hello({

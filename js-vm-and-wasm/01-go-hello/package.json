@@ -1,0 +1,10 @@
+{
+	"name": "wasm_university",
+	"version": "1.0.0",
+	"author": "@k33g",
+	"license": "MIT",
+	"dependencies": {
+		"fastify": "^3.6.0",
+		"fastify-static": "^3.2.1"
+	}
+}

@@ -1,4 +1,4 @@
-image: k33g/free-wasm:0.0.2
+image: k33g/free-wasm:0.0.3
 
 tasks:
   - name: initialize

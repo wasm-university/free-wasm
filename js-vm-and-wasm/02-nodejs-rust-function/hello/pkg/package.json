@@ -1,0 +1,11 @@
+{
+  "name": "hello",
+  "version": "0.1.0",
+  "files": [
+    "hello_bg.wasm",
+    "hello.js",
+    "hello.d.ts"
+  ],
+  "main": "hello.js",
+  "types": "hello.d.ts"
+}
