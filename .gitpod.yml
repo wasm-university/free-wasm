@@ -24,6 +24,18 @@ tasks:
       #npm install
       clear
 
+  - name: zero-to-hero
+    command: |
+      cd zero-to-hero
+      clear
+
+  - name: wazero-step-by-step
+    command: |
+      cd wazero-step-by-step
+      clear
+
+
+
 ports:
   - port: 8080
     visibility: public
