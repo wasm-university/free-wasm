@@ -48,11 +48,13 @@ tasks:
     command: |
       cd zero-to-hero/01-use-cli-grain-division
       clear
+      exa --oneline
 
   - name: zero-to-hero/02-go-sat
     command: |
       cd zero-to-hero/02-go-sat
       clear
+      exa --oneline
 
   - name: zero-to-hero/02-go-sat/bis
     openMode: split-right
@@ -60,10 +62,31 @@ tasks:
       cd zero-to-hero/02-go-sat
       clear
 
+  - name: zero-to-hero/03-sat/as-service
+    command: |
+      cd zero-to-hero/03-sat
+      clear
+      exa --oneline
 
+  - name: zero-to-hero/03-sat/js-service
+    openMode: split-right
+    command: |
+      cd zero-to-hero/03-sat
+      clear
+      exa --oneline
 
+  - name: zero-to-hero/03-sat/hello-service
+    command: |
+      cd zero-to-hero/03-sat
+      clear
+      exa --oneline
 
-
+  - name: zero-to-hero/03-sat/query-service
+    openMode: split-right
+    command: |
+      cd zero-to-hero/03-sat
+      clear
+      exa --oneline
 
 ports:
   - port: 8080
