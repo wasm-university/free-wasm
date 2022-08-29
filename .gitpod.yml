@@ -32,11 +32,13 @@ tasks:
     command: |
       cd wazero-step-by-step/01-wasi-simple-function
       clear
+      exa --oneline
 
   - name: 2️⃣-wazero-step-by-step/02-wasi-host-function
     command: |
       cd wazero-step-by-step/02-wasi-host-function
       clear
+      exa --oneline
 
 #  - name: zero-to-hero
 #    command: |
