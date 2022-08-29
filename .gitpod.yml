@@ -19,38 +19,37 @@ tasks:
       source /home/gitpod/.wasmedge/env
       wasmedge --version
 
-    init: |
-      echo "🚀 initialize"
-      #npm install
-      clear
+#    init: |
+#      echo "🚀 initialize"
+#      clear
 
-  - name: wazero-step-by-step
-    command: |
-      cd wazero-step-by-step
-      clear
+#  - name: wazero-step-by-step
+#    command: |
+#      cd wazero-step-by-step
+#      clear
 
-  - name: wazero-step-by-step/01-wasi-simple-function
+  - name: 1️⃣-wazero-step-by-step/01-wasi-simple-function
     command: |
       cd wazero-step-by-step/01-wasi-simple-function
       clear
 
-  - name: wazero-step-by-step/02-wasi-host-function
+  - name: 2️⃣-wazero-step-by-step/02-wasi-host-function
     command: |
       cd wazero-step-by-step/02-wasi-host-function
       clear
 
-  - name: zero-to-hero
-    command: |
-      cd zero-to-hero
-      clear
+#  - name: zero-to-hero
+#    command: |
+#      cd zero-to-hero
+#      clear
 
-  - name: zero-to-hero/01-use-cli-grain-division
+  - name: 3️⃣-zero-to-hero/01-use-cli-grain-division
     command: |
       cd zero-to-hero/01-use-cli-grain-division
       clear
       exa --oneline
 
-  - name: zero-to-hero/02-go-sat
+  - name: 4️⃣-zero-to-hero/02-go-sat
     command: |
       cd zero-to-hero/02-go-sat
       clear
@@ -62,7 +61,7 @@ tasks:
       cd zero-to-hero/02-go-sat
       clear
 
-  - name: zero-to-hero/03-sat/as-service
+  - name: 5️⃣-zero-to-hero/03-sat/as-service
     command: |
       cd zero-to-hero/03-sat
       clear
@@ -75,7 +74,7 @@ tasks:
       clear
       exa --oneline
 
-  - name: zero-to-hero/03-sat/hello-service
+  - name: 6️⃣-zero-to-hero/03-sat/hello-service
     command: |
       cd zero-to-hero/03-sat
       clear
