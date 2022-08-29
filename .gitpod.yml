@@ -24,15 +24,44 @@ tasks:
       #npm install
       clear
 
+  - name: wazero-step-by-step
+    command: |
+      cd wazero-step-by-step
+      clear
+
+  - name: wazero-step-by-step/01-wasi-simple-function
+    command: |
+      cd wazero-step-by-step/01-wasi-simple-function
+      clear
+
+  - name: wazero-step-by-step/02-wasi-host-function
+    command: |
+      cd wazero-step-by-step/02-wasi-host-function
+      clear
+
   - name: zero-to-hero
     command: |
       cd zero-to-hero
       clear
 
-  - name: wazero-step-by-step
+  - name: zero-to-hero/01-use-cli-grain-division
     command: |
-      cd wazero-step-by-step
+      cd zero-to-hero/01-use-cli-grain-division
       clear
+
+  - name: zero-to-hero/02-go-sat
+    command: |
+      cd zero-to-hero/02-go-sat
+      clear
+
+  - name: zero-to-hero/02-go-sat/bis
+    openMode: split-right
+    command: |
+      cd zero-to-hero/02-go-sat
+      clear
+
+
+
 
 
 
