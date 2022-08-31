@@ -1,6 +1,6 @@
 name: hello
 namespace: default
-lang: grain
+lang: swift
 version: ""
 apiVersion: 0.15.1
 fqfnUri: ""

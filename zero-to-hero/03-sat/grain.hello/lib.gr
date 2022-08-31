@@ -1,0 +1,39 @@
+import Bytes from "bytes"
+import Option from "option"
+import Result from "result"
+import String from "string"
+import Http from "suborbital/http"
+import Log from "suborbital/log"
+
+export let run: Bytes -> Result<Bytes, (Int32, String)> = input =>  {
+
+  let mut message = ""
+
+  Log.info("👋 hello from Grain")
+
+  Log.info("🌍 Calling AssemblyScript ... 😄")
+  let callAssemblyScript = Http.get("http://localhost:8088", None)
+
+
+  match (callAssemblyScript) {
+    Ok(value) => {
+      Log.info(Bytes.toString(value))
+      message = String.concat(message, Bytes.toString(value))
+    },
+    Err(err) => Log.error("😡 ouch")
+  }
+
+  Log.info("🌍 Calling JavaScript ... 😍")
+  let callJavaScript = Http.get("http://localhost:8089", None)
+
+  match (callJavaScript) {
+    Ok(value) => {
+      Log.info(Bytes.toString(value))
+      message = String.concat(message, Bytes.toString(value))
+    },
+    Err(err) => Log.error("😡 ouch")
+  }
+
+  //Ok(Bytes.concat(Bytes.fromString("😃 👋 Hello "), input))
+  Ok(Bytes.fromString(message))
+}
