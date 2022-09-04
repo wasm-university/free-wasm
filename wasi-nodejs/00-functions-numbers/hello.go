@@ -1,8 +1,8 @@
+
 package main
 
 import "fmt"
 
-// This is the entrypoint into our go module
 func main() {
   fmt.Println("👋 Hello from TinyGo")
 }
