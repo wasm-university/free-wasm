@@ -16,46 +16,45 @@ func main() {
 	ctx := context.Background()
 
 	// Create a new WebAssembly Runtime.
-	wasmRuntime := wazero.NewRuntimeWithConfig(ctx, wazero.NewRuntimeConfig().WithWasmCore2())
-	defer wasmRuntime.Close(ctx) // This closes everything this Runtime created.
+	r := wazero.NewRuntimeWithConfig(ctx, wazero.NewRuntimeConfig().WithWasmCore2())
+  
+	defer r.Close(ctx)
 
 	// 👋 Add a Host Function
 	// Instantiate a Go-defined module named "env"
 	// that exports a function (host_log_uint32) from the host to the wasm module
-	_, errEnv := wasmRuntime.NewModuleBuilder("env").
+	_, errEnv := r.NewModuleBuilder("env").
 		ExportFunction("hostLogUint32", func(value uint32) {
 			fmt.Println("🤖:", value)
 		}).
-		Instantiate(ctx, wasmRuntime)
+		Instantiate(ctx, r)
 
 	if errEnv != nil {
-		log.Panicln("🔴 Error with env module and host function(s):", errEnv)
+		log.Panicln(errEnv)
 	}
 
-	_, errInstantiate := wasi_snapshot_preview1.Instantiate(ctx, wasmRuntime)
-	if errInstantiate != nil {
-		log.Panicln("🔴 Error with Instantiate:", errInstantiate)
+	_, err := wasi_snapshot_preview1.Instantiate(ctx, r)
+	if err != nil {
+		log.Panicln(err)
 	}
 
 	// Load then Instantiate a WebAssembly module
-	helloWasm, errLoadWasmModule := os.ReadFile("./function/hello.wasm")
-	if errLoadWasmModule != nil {
-		log.Panicln("🔴 Error while loading the wasm module", errLoadWasmModule)
+	helloWasm, err := os.ReadFile("./function/hello.wasm")
+	if err != nil {
+		log.Panicln(err)
 	}
 
-	mod, errInstanceWasmModule := wasmRuntime.InstantiateModuleFromBinary(ctx, helloWasm)
-	if errInstanceWasmModule != nil {
-		log.Panicln("🔴 Error while creating module instance ", errInstanceWasmModule)
+	mod, err := r.InstantiateModuleFromBinary(ctx, helloWasm)
+	if err != nil {
+		log.Panicln(err)
 	}
 
 	// Get references to WebAssembly function: "add"
 	addWasmModuleFunction := mod.ExportedFunction("add")
 
-	// Now, we can call "add", which reads the string we wrote to memory!
-	// result []uint64
-	result, errCallFunction := addWasmModuleFunction.Call(ctx, 20, 22)
-	if errCallFunction != nil {
-		log.Panicln("🔴 Error while calling the function ", errCallFunction)
+	result, err := addWasmModuleFunction.Call(ctx, 20, 22)
+	if err != nil {
+		log.Panicln(err)
 	}
 
 	fmt.Println("result:", result[0])
