@@ -1,10 +1,10 @@
 package main
 
-func main() { }
+func main() {}
 
 //export hello
 func hello() *byte {
-  return &(([]byte)("hello world")[0])
+	return &(([]byte)("hello world")[0])
 }
 
 /*
@@ -12,5 +12,3 @@ func hello() *byte {
 - get the pos of 1st byte of the array
 - return a pointer of the byte
 */
-
-

@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/wasi_snapshot_preview1"
+	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
 )
 
 func main() {
@@ -15,14 +15,10 @@ func main() {
 	ctx := context.Background()
 
 	// Create a new WebAssembly Runtime.
-	r := wazero.NewRuntimeWithConfig(
-		ctx,
-		wazero.NewRuntimeConfig().
-			WithWasmCore2())
-
-
+	r := wazero.NewRuntime(ctx)
 	defer r.Close(ctx) // This closes everything this Runtime created.
 
+	// TinyGo specific to use WASI
 	_, err := wasi_snapshot_preview1.Instantiate(ctx, r)
 	if err != nil {
 		log.Panicln(err)
