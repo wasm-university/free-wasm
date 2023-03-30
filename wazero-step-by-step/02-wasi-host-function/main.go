@@ -28,7 +28,7 @@ func main() {
 			fmt.Println("🤖:", value)
 		}).
 		Export("hostLogUint32").
-		Instantiate(ctx, r)
+		Instantiate(ctx)
 
 	if errEnv != nil {
 		log.Panicln(errEnv)
@@ -45,7 +45,7 @@ func main() {
 		log.Panicln(err)
 	}
 
-	mod, err := r.InstantiateModuleFromBinary(ctx, helloWasm)
+	mod, err := r.Instantiate(ctx, helloWasm)
 	if err != nil {
 		log.Panicln(err)
 	}
